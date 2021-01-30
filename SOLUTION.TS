@@ -11,3 +11,28 @@ const btn_del = document.querySelector('#todo-delall')
 const btn_del_comp = document.querySelector('#todo-delcom')
 const list = document.querySelector('#todo-list')
 let arr = []
+
+btn.addEventListener("click", () => {
+    let text:string = (<HTMLInputElement>document.querySelector('#todo-item')).value;
+    const todo_mis:object = new task (text)
+    arr.push(todo_mis)
+    create(todo_mis)
+    localStorage.setItem('array', JSON.stringify(arr))         
+})
+
+function create(item:any):void{
+    let div = document.createElement('div')
+    div.classList.add('todo-row')
+    let pText = document.createElement('p')
+    pText.classList.add('todo-item')    
+    let btn_done = document.createElement('button')
+    btn_done.classList.add('todo-ok')
+    btn_done.innerText = 'v'
+    pText.innerText = item.text
+    div.appendChild(pText)
+    div.appendChild(btn_done)
+    list.appendChild(div)
+    btn_done.addEventListener("click", (e) => {
+        mark(e.target)
+    })
+  }
