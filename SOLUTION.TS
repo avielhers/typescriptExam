@@ -36,3 +36,9 @@ function create(item:any):void{
         mark(e.target)
     })
   }
+
+  function mark(n):void{
+    (n.parentElement.firstElementChild).classList.add('done')
+    n.classList.remove("todo-ok")
+    n.classList.add("todo-cx")
+  }
