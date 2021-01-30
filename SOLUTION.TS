@@ -12,6 +12,15 @@ const btn_del_comp = document.querySelector('#todo-delcom')
 const list = document.querySelector('#todo-list')
 let arr = []
 
+btn_del.addEventListener("click", () => {
+    let delete_all:boolean = confirm("Delete tasks?");
+    if(delete_all){
+        localStorage.clear()
+        arr = []
+        list.innerHTML =""; 
+    }
+  })
+  
 btn.addEventListener("click", () => {
     let text:string = (<HTMLInputElement>document.querySelector('#todo-item')).value;
     const todo_mis:object = new task (text)
