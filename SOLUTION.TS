@@ -39,6 +39,24 @@ btn.addEventListener("click", () => {
     localStorage.setItem('array', JSON.stringify(arr))         
 })
 
+btn_del_comp.addEventListener("click", () => {
+    let array_list:any = document.querySelectorAll('.todo-row')
+    let ar = []
+    let b =0;
+    for (const iterator of array_list) {
+        if(iterator.lastElementChild.classList == 'todo-cx'){
+            ar.push(b)
+            iterator.remove()
+        }
+        b+=1;
+    }
+    let new_array = JSON.parse(localStorage.getItem("array"));
+    for(let o=ar.length-1;o>=0;o--)
+        new_array.splice(ar[o], 1);
+    createarr(new_array)
+    arr = new_array
+  })
+
 function create(item:any):void{
     let div = document.createElement('div')
     div.classList.add('todo-row')
@@ -60,4 +78,11 @@ function create(item:any):void{
     (n.parentElement.firstElementChild).classList.add('done')
     n.classList.remove("todo-ok")
     n.classList.add("todo-cx")
+  }
+
+  function createarr(new_array):void{
+    if(new_array.length ==0)
+    localStorage.clear()
+    else
+    localStorage.setItem('array', JSON.stringify(new_array))         
   }

@@ -34,6 +34,24 @@ btn.addEventListener("click", function () {
     create(todo_mis);
     localStorage.setItem('array', JSON.stringify(arr));
 });
+btn_del_comp.addEventListener("click", function () {
+    var array_list = document.querySelectorAll('.todo-row');
+    var ar = [];
+    var b = 0;
+    for (var _i = 0, array_list_1 = array_list; _i < array_list_1.length; _i++) {
+        var iterator = array_list_1[_i];
+        if (iterator.lastElementChild.classList == 'todo-cx') {
+            ar.push(b);
+            iterator.remove();
+        }
+        b += 1;
+    }
+    var new_array = JSON.parse(localStorage.getItem("array"));
+    for (var o = ar.length - 1; o >= 0; o--)
+        new_array.splice(ar[o], 1);
+    createarr(new_array);
+    arr = new_array;
+});
 function create(item) {
     var div = document.createElement('div');
     div.classList.add('todo-row');
@@ -54,4 +72,10 @@ function mark(n) {
     (n.parentElement.firstElementChild).classList.add('done');
     n.classList.remove("todo-ok");
     n.classList.add("todo-cx");
+}
+function createarr(new_array) {
+    if (new_array.length == 0)
+        localStorage.clear();
+    else
+        localStorage.setItem('array', JSON.stringify(new_array));
 }
