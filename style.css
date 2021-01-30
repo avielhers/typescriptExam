@@ -58,14 +58,17 @@
 .todo-row {
     display: flex;
     margin-top: 10px;
+    align-items: baseline;
+    height: 50px;
 }
 
 /* (F2) ITEM TEXT */
 .todo-item {
-    width: 100%;
+    /* width: 100%; */
     background: #fff;
     border: 1px solid #eee;
     padding: 10px;
+    flex:90%
 }
 
 .todo-item.cx {
@@ -81,7 +84,11 @@
 /* (F3) CANCEL AND OK BUTTONS */
 .todo-cx,
 .todo-ok {
-    width: 50px;
+    /* width: 50px; */
+    padding: 10px;
+    height: 40px;
+    /* margin-top: 20px; */
+    flex:10%
 }
 
 .todo-cx {

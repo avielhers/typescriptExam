@@ -33,10 +33,12 @@ btn_del.addEventListener("click", () => {
 
 btn.addEventListener("click", () => {
     let text:string = (<HTMLInputElement>document.querySelector('#todo-item')).value;
-    const todo_mis:object = new task (text)
-    arr.push(todo_mis)
-    create(todo_mis)
-    localStorage.setItem('array', JSON.stringify(arr))         
+    if(text != ""){
+        const todo_mis:object = new task (text)
+        arr.push(todo_mis)
+        create(todo_mis)
+        localStorage.setItem('array', JSON.stringify(arr))        
+    } 
 })
 
 btn_del_comp.addEventListener("click", () => {
@@ -44,7 +46,7 @@ btn_del_comp.addEventListener("click", () => {
     let ar = []
     let b =0;
     for (const iterator of array_list) {
-        if(iterator.lastElementChild.classList == 'todo-cx'){
+        if(iterator.lastElementChild.classList == 'todo-ok'){
             ar.push(b)
             iterator.remove()
         }
@@ -55,7 +57,7 @@ btn_del_comp.addEventListener("click", () => {
         new_array.splice(ar[o], 1);
     createarr(new_array)
     arr = new_array
-  })
+})
 
 function create(item:any):void{
     let div = document.createElement('div')
@@ -63,7 +65,7 @@ function create(item:any):void{
     let pText = document.createElement('p')
     pText.classList.add('todo-item')    
     let btn_done = document.createElement('button')
-    btn_done.classList.add('todo-ok')
+    btn_done.classList.add('todo-cx')
     btn_done.innerText = 'v'
     pText.innerText = item.text
     div.appendChild(pText)
@@ -72,12 +74,12 @@ function create(item:any):void{
     btn_done.addEventListener("click", (e) => {
         mark(e.target)
     })
-  }
+}
 
   function mark(n):void{
     (n.parentElement.firstElementChild).classList.add('done')
-    n.classList.remove("todo-ok")
-    n.classList.add("todo-cx")
+    n.classList.remove("todo-cx")
+    n.classList.add("todo-ok")
   }
 
   function createarr(new_array):void{

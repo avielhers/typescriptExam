@@ -29,10 +29,12 @@ btn_del.addEventListener("click", function () {
 });
 btn.addEventListener("click", function () {
     var text = document.querySelector('#todo-item').value;
-    var todo_mis = new task(text);
-    arr.push(todo_mis);
-    create(todo_mis);
-    localStorage.setItem('array', JSON.stringify(arr));
+    if (text != "") {
+        var todo_mis = new task(text);
+        arr.push(todo_mis);
+        create(todo_mis);
+        localStorage.setItem('array', JSON.stringify(arr));
+    }
 });
 btn_del_comp.addEventListener("click", function () {
     var array_list = document.querySelectorAll('.todo-row');
@@ -40,7 +42,7 @@ btn_del_comp.addEventListener("click", function () {
     var b = 0;
     for (var _i = 0, array_list_1 = array_list; _i < array_list_1.length; _i++) {
         var iterator = array_list_1[_i];
-        if (iterator.lastElementChild.classList == 'todo-cx') {
+        if (iterator.lastElementChild.classList == 'todo-ok') {
             ar.push(b);
             iterator.remove();
         }
@@ -58,7 +60,7 @@ function create(item) {
     var pText = document.createElement('p');
     pText.classList.add('todo-item');
     var btn_done = document.createElement('button');
-    btn_done.classList.add('todo-ok');
+    btn_done.classList.add('todo-cx');
     btn_done.innerText = 'v';
     pText.innerText = item.text;
     div.appendChild(pText);
@@ -70,8 +72,8 @@ function create(item) {
 }
 function mark(n) {
     (n.parentElement.firstElementChild).classList.add('done');
-    n.classList.remove("todo-ok");
-    n.classList.add("todo-cx");
+    n.classList.remove("todo-cx");
+    n.classList.add("todo-ok");
 }
 function createarr(new_array) {
     if (new_array.length == 0)
